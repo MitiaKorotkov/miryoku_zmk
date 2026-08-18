@@ -21,6 +21,14 @@
 // The two spare thumb keys (the 4th thumb per side that Miryoku's core
 // layers always leave unbound) are otherwise idle, so the combo below uses
 // the right one plus its neighbour rather than spending a dedicated key.
+//
+// Russian has 33 letters, 4 more than fit in the 30 positions that mirror
+// Latin Q..P/A../Z../. Rather than needing dedicated key positions for
+// those, the outer pinky columns on the top and home rows (also otherwise
+// idle) are reused to send the plain US keycodes the "ru" layout maps to
+// the 4 missing letters - GRAVE->E, LBKT->X, RBKT->Ъ, APOS->Э - the same
+// way a physical Russian keyboard's [, ], ' and ` keys do. The bottom row's
+// outer columns are left idle; all 33 letters are covered without them.
 
 U_MACRO(rus_toggle, bindings = <&tog 10>, <&kp LA(LSHIFT)>;)
 
@@ -28,10 +36,10 @@ U_MACRO(rus_toggle, bindings = <&tog 10>, <&kp LA(LSHIFT)>;)
     RUS {
         display-name = "Rus";
         bindings = <
-&trans  &kp Q  &kp W  &kp E  &kp R  &kp T       &kp Y  &kp U  &kp I     &kp O    &kp P     &trans \
-&trans  &kp A  &kp S  &kp D  &kp F  &kp G       &kp H  &kp J  &kp K     &kp L    &kp SEMI  &trans \
-&trans  &kp Z  &kp X  &kp C  &kp V  &kp B       &kp N  &kp M  &kp COMMA &kp DOT  &kp FSLH  &trans \
-                       &trans &trans &trans      &trans &trans &trans   &trans
+&kp GRAVE  &kp Q  &kp W  &kp E  &kp R  &kp T       &kp Y  &kp U  &kp I     &kp O    &kp P     &kp LBKT \
+&kp RBKT   &kp A  &kp S  &kp D  &kp F  &kp G       &kp H  &kp J  &kp K     &kp L    &kp SEMI  &kp APOS \
+&trans     &kp Z  &kp X  &kp C  &kp V  &kp B       &kp N  &kp M  &kp COMMA &kp DOT  &kp FSLH  &trans   \
+                          &trans &trans &trans      &trans &trans &trans   &trans
         >;
     };
 };
