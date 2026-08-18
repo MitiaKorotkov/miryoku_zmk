@@ -49,7 +49,7 @@ U_MACRO(rus_toggle, bindings = <&tog 10>, <&kp LA(LSHIFT)>;)
         compatible = "zmk,combos";
         combo_rus_toggle {
             timeout-ms = <50>;
-            key-positions = <12 36>; // A (left pinky) + spare left thumb key
+            key-positions = <13 36>; // A (left pinky) + spare left thumb key
             // No `layers` property = layer_mask 0 = active on every layer
             // (this ZMK version's combo.c can't fold BIT(-1) into a
             // compile-time constant, so the documented `<-1>` spelling for
