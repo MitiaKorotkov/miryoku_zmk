@@ -4,3 +4,46 @@
 #include "../miryoku/custom_config.h"
 #include "../miryoku/mapping/44/fuji44.h"
 #include "../miryoku/miryoku.dtsi"
+
+// Cyrillic (RU/YCUKEN) support.
+//
+// ZMK/HID sends raw US-QWERTY key positions, not characters - the actual
+// glyph is decided by the host OS keyboard layout. The host is already
+// configured with a "us,ru" layout toggled by Alt+Shift (grp:alt_shift_toggle
+// in Hyprland), so switching languages only requires:
+//   1. An extra layer (RUS, index 10, appended after Miryoku's 10 layers
+//      BASE..FUN) that sends plain positional US-QWERTY codes instead of
+//      Colemak, since the host's "ru" layout expects standard QWERTY
+//      physical positions to produce the correct Cyrillic letters.
+//   2. A way to flip both the ZMK layer and the host's active layout at
+//      once, so one physical action keeps them in sync.
+//
+// The two spare thumb keys (the 4th thumb per side that Miryoku's core
+// layers always leave unbound) are otherwise idle, so the combo below uses
+// the right one plus its neighbour rather than spending a dedicated key.
+
+U_MACRO(rus_toggle, bindings = <&tog 10>, <&kp LA(LSHIFT)>;)
+
+&{/keymap} {
+    RUS {
+        display-name = "Rus";
+        bindings = <
+&trans  &kp Q  &kp W  &kp E  &kp R  &kp T       &kp Y  &kp U  &kp I     &kp O    &kp P     &trans \
+&trans  &kp A  &kp S  &kp D  &kp F  &kp G       &kp H  &kp J  &kp K     &kp L    &kp SEMI  &trans \
+&trans  &kp Z  &kp X  &kp C  &kp V  &kp B       &kp N  &kp M  &kp COMMA &kp DOT  &kp FSLH  &trans \
+                       &trans &trans &trans      &trans &trans &trans   &trans
+        >;
+    };
+};
+
+/ {
+    combos {
+        compatible = "zmk,combos";
+        combo_rus_toggle {
+            timeout-ms = <50>;
+            key-positions = <42 43>;
+            layers = <-1>;
+            bindings = <&rus_toggle>;
+        };
+    };
+};
