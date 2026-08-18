@@ -59,3 +59,20 @@ U_MACRO(rus_toggle, bindings = <&tog 10>, <&kp LA(LSHIFT)>;)
         };
     };
 };
+
+// Put a comma on the idle bottom-row outer-pinky key (position 35, far
+// right). This is the one Base-layer position Miryoku's own mapping always
+// leaves as &none, so the only way to give it a binding is to restate the
+// whole 44-key array for BASE - everything below is identical to what
+// mapping/44/fuji44.h + MIRYOKU_ALTERNATIVES_BASE_COLEMAK_FLIP already
+// generate, with just that last XXX swapped for &kp COMMA.
+&{/keymap} {
+    BASE {
+        bindings = <
+XXX  &kp Q             &kp W             &kp F  &kp P  &kp G               &kp J  &kp L             &kp U             &kp Y  &kp SQT              XXX \
+XXX  U_MT(LGUI, A)     U_MT(LALT, R)     U_MT(LCTRL, S)    U_MT(LSHFT, T)    &kp D               &kp H  U_MT(LSHFT, N)    U_MT(LCTRL, E)    U_MT(LALT, I)     U_MT(LGUI, O)  XXX \
+XXX  U_LT(U_BUTTON, Z) U_MT(RALT, X)     &kp C  &kp V  &kp B               &kp K  &kp M             &kp COMMA         U_MT(RALT, DOT)   U_LT(U_BUTTON, SLASH)  &kp COMMA \
+                  XXX  U_LT(U_FUN, DEL)  U_LT(U_NUM, BSPC) U_LT(U_SYM, RET)    U_LT(U_MOUSE, TAB) U_LT(U_NAV, SPACE) U_LT(U_MEDIA, ESC)   XXX
+        >;
+    };
+};
