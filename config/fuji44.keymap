@@ -18,9 +18,9 @@
 //   2. A way to flip both the ZMK layer and the host's active layout at
 //      once, so one physical action keeps them in sync.
 //
-// The two spare thumb keys (the 4th thumb per side that Miryoku's core
-// layers always leave unbound) are otherwise idle, so the combo below uses
-// the right one plus its neighbour rather than spending a dedicated key.
+// Toggled by a combo on the spare left thumb key (the 4th thumb per side
+// that Miryoku's core layers always leave unbound) plus A, rather than
+// spending a dedicated key.
 //
 // Russian has 33 letters, 4 more than fit in the 30 positions that mirror
 // Latin Q..P/A../Z../. Rather than needing dedicated key positions for
@@ -49,7 +49,7 @@ U_MACRO(rus_toggle, bindings = <&tog 10>, <&kp LA(LSHIFT)>;)
         compatible = "zmk,combos";
         combo_rus_toggle {
             timeout-ms = <50>;
-            key-positions = <42 43>;
+            key-positions = <12 36>; // A (left pinky) + spare left thumb key
             // No `layers` property = layer_mask 0 = active on every layer
             // (this ZMK version's combo.c can't fold BIT(-1) into a
             // compile-time constant, so the documented `<-1>` spelling for
