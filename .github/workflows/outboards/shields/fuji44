@@ -1,0 +1,6 @@
+# Fuji44 shield, corne-derived 44-key split keyboard
+
+outboard_repository=MitiaKorotkov/zmk-config-fuji44
+outboard_ref=main
+outboard_from=config/boards/shields/fuji44
+outboard_to=boards/shields/fuji44
