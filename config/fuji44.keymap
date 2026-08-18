@@ -50,7 +50,7 @@ U_MACRO(rus_toggle, bindings = <&tog 10>, <&kp LA(LSHIFT)>;)
         combo_rus_toggle {
             timeout-ms = <50>;
             key-positions = <42 43>;
-            layers = <-1>;
+            layers = <(-1)>;
             bindings = <&rus_toggle>;
         };
     };
