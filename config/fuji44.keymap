@@ -50,7 +50,11 @@ U_MACRO(rus_toggle, bindings = <&tog 10>, <&kp LA(LSHIFT)>;)
         combo_rus_toggle {
             timeout-ms = <50>;
             key-positions = <42 43>;
-            layers = <(-1)>;
+            // No `layers` property = layer_mask 0 = active on every layer
+            // (this ZMK version's combo.c can't fold BIT(-1) into a
+            // compile-time constant, so the documented `<-1>` spelling for
+            // "all layers" fails to build; omitting the property reaches
+            // the same `!combo->layer_mask` code path).
             bindings = <&rus_toggle>;
         };
     };
