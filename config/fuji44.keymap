@@ -64,6 +64,33 @@ U_MACRO(rus_toggle, bindings = <&tog 10>, <&kp LA(LSHIFT)>;)
             // the same `!combo->layer_mask` code path).
             bindings = <&rus_toggle>;
         };
+
+        // Punctuation that's a single easy keystroke on Base/Latin but
+        // buried behind Num+Shift+<digit> on RUS - Base's "?", "\"" and ";"
+        // ride on the Colemak/QWERTY mapping, which doesn't carry over to
+        // the "ru" xkb group. Each combo pairs the spare right thumb key
+        // (position 43, otherwise idle) with whichever position holds that
+        // symbol on Base, so the second key doubles as a mnemonic. They
+        // send the literal Shift+<digit> HID keycode the "ru" group maps to
+        // the desired glyph (verified with `xkbcli compile-keymap --layout
+        // us,ru --options grp:alt_shift_toggle`) - only meaningful while RUS
+        // is toggled on, since under the "us" group the same digit position
+        // maps to something else entirely.
+        combo_rus_question {
+            timeout-ms = <50>;
+            key-positions = <34 43>; // Base's "/" (Shift+/ = "?" on Base) + spare right thumb
+            bindings = <&kp LS(N7)>; // Shift+7 = "?" under "ru"
+        };
+        combo_rus_quote {
+            timeout-ms = <50>;
+            key-positions = <9 43>; // Base's "'" (Shift+' = "\"" on Base) + spare right thumb
+            bindings = <&kp LS(N2)>; // Shift+2 = "\"" under "ru"
+        };
+        combo_rus_semi {
+            timeout-ms = <50>;
+            key-positions = <35 43>; // Base's ";" key + spare right thumb
+            bindings = <&kp LS(N4)>; // Shift+4 = ";" under "ru"
+        };
     };
 };
 
