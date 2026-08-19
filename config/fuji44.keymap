@@ -28,7 +28,8 @@
 // idle) are reused to send the plain US keycodes the "ru" layout maps to
 // the 4 missing letters - GRAVE->E, LBKT->X, RBKT->Ъ, APOS->Э - the same
 // way a physical Russian keyboard's [, ], ' and ` keys do. The bottom row's
-// outer columns are left idle; all 33 letters are covered without them.
+// outer columns get MINUS (left) and COMMA (right, explicit rather than
+// falling through to Base - Base's own comma moved elsewhere).
 
 U_MACRO(rus_toggle, bindings = <&tog 10>, <&kp LA(LSHIFT)>;)
 
@@ -38,7 +39,7 @@ U_MACRO(rus_toggle, bindings = <&tog 10>, <&kp LA(LSHIFT)>;)
         bindings = <
 &kp GRAVE  &kp Q  &kp W  &kp E  &kp R  &kp T       &kp Y  &kp U  &kp I     &kp O    &kp P     &kp LBKT \
 &kp RBKT   &kp A  &kp S  &kp D  &kp F  &kp G       &kp H  &kp J  &kp K     &kp L    &kp SEMI  &kp APOS \
-&trans     &kp Z  &kp X  &kp C  &kp V  &kp B       &kp N  &kp M  &kp COMMA &kp DOT  &kp FSLH  &trans   \
+&kp MINUS  &kp Z  &kp X  &kp C  &kp V  &kp B       &kp N  &kp M  &kp COMMA &kp DOT  &kp FSLH  &kp COMMA \
                           &trans &trans &trans      &trans &trans &trans   &trans
         >;
     };
@@ -60,11 +61,12 @@ U_MACRO(rus_toggle, bindings = <&tog 10>, <&kp LA(LSHIFT)>;)
     };
 };
 
-// Fill the 5 outer-pinky-column positions Miryoku's own mapping always
-// leaves as &none with punctuation that's frequent enough to want on the
-// base layer without a trip through Sym - brackets on the top row, parens
-// on the home row, minus at bottom-left mirroring the comma already added
-// at bottom-right (position 35). Also bakes in the non-flip thumb order
+// Fill the outer-pinky-column positions Miryoku's own mapping always leaves
+// as &none with punctuation that's frequent enough to want on the base
+// layer without a trip through Sym - brackets on the top row, parens on the
+// home row, minus/underscore at the bottom (comma is already reachable via
+// the regular Colemak position, so it isn't duplicated here). Also bakes
+// in the non-flip thumb order
 // (Media/Nav/Mouse left, Sym/Num/Fun right) matching custom_config.h's
 // MIRYOKU_NAV_VI (no MIRYOKU_LAYERS_FLIP). Since this restates the whole
 // 44-key array for BASE, everything below matches what mapping/44/fuji44.h
@@ -75,7 +77,7 @@ U_MACRO(rus_toggle, bindings = <&tog 10>, <&kp LA(LSHIFT)>;)
         bindings = <
 &kp LBKT  &kp Q             &kp W             &kp F  &kp P  &kp G               &kp J  &kp L             &kp U             &kp Y  &kp SQT              &kp RBKT \
 &kp LPAR  U_MT(LGUI, A)     U_MT(LALT, R)     U_MT(LCTRL, S)    U_MT(LSHFT, T)    &kp D               &kp H  U_MT(LSHFT, N)    U_MT(LCTRL, E)    U_MT(LALT, I)     U_MT(LGUI, O)  &kp RPAR \
-&kp MINUS U_LT(U_BUTTON, Z) U_MT(RALT, X)     &kp C  &kp V  &kp B               &kp K  &kp M             &kp COMMA         U_MT(RALT, DOT)   U_LT(U_BUTTON, SLASH)  &kp COMMA \
+&kp MINUS U_LT(U_BUTTON, Z) U_MT(RALT, X)     &kp C  &kp V  &kp B               &kp K  &kp M             &kp COMMA         U_MT(RALT, DOT)   U_LT(U_BUTTON, SLASH)  &kp UNDER \
                   XXX  U_LT(U_MEDIA, ESC) U_LT(U_NAV, SPACE) U_LT(U_MOUSE, TAB)    U_LT(U_SYM, RET) U_LT(U_NUM, BSPC) U_LT(U_FUN, DEL)   XXX
         >;
     };
